@@ -14,7 +14,8 @@ module.exports = function(eleventyConfig) {
     dir: {
       input: ".",
       output: "docs"
-    }
+    },
+    pathPrefix: "/eleventy-test-repo/" // <-- your repo name here
   };
 };
 
