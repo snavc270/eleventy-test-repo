@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>{{ site.title }}</title>
-    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="{{ '/styles/style.css' | url }}">
   </head>
   <body>
     {% include "nav.njk" %}
@@ -17,7 +17,7 @@
         <ul>
             <!-- loops through all of our md files with the tag 'post' --> 
         {% for post in collections.post %}
-        <li><a href="{{ post.url }}">{{ post.data.title }}</a> – {{ post.date }}</li>
+        <li><a href="{{ post.url | url }}">{{ post.data.title }}</a> – {{ post.date }}</li>
         {% endfor %}
         </ul>
     </main>

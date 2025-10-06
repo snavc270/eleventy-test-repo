@@ -11,6 +11,7 @@ module.exports = function(eleventyConfig) {
   });
 
   return {
+    pathPrefix: "/eleventy-test-repo/",
     dir: {
       input: ".",
       output: "docs"
