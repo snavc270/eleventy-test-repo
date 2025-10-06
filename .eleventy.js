@@ -1,7 +1,6 @@
 const { DateTime } = require("luxon");
 
 module.exports = function(eleventyConfig) {
-  // Tell Eleventy to copy the entire styles folder
   eleventyConfig.addPassthroughCopy("styles");
   eleventyConfig.addPassthroughCopy("assets");
 
@@ -11,12 +10,9 @@ module.exports = function(eleventyConfig) {
   });
 
   return {
+    dir: { input: ".", output: "docs" },
     pathPrefix: "/eleventy-test-repo/",
-    dir: {
-      input: ".",
-      output: "docs"
-    }
+    htmlTemplateEngine: "njk",
+    templateFormats: ["html", "njk", "md"]
   };
 };
-
-
