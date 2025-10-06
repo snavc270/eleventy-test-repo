@@ -9,9 +9,11 @@ module.exports = function(eleventyConfig) {
       .toFormat("LLLL d, yyyy");
   });
 
+  // Add pathPrefix as a global variable
+  eleventyConfig.addGlobalData("pathPrefix", "/eleventy-test-repo/");
+
   return {
     dir: { input: ".", output: "docs" },
-    pathPrefix: "/eleventy-test-repo/",
     htmlTemplateEngine: "njk",
     templateFormats: ["html", "njk", "md"]
   };
