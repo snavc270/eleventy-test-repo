@@ -1,26 +1,30 @@
 const { DateTime } = require("luxon");
 
-module.exports = function(eleventyConfig) {
-  eleventyConfig.addPassthroughCopy("styles");
-  eleventyConfig.addPassthroughCopy("assets");
+module.exports = function (eleventyConfig) {
+    eleventyConfig.addPassthroughCopy("styles");
+    eleventyConfig.addPassthroughCopy("assets");
 
-  eleventyConfig.addFilter("readableDate", (dateObj) => {
-    return DateTime.fromJSDate(dateObj, { zone: "utc" })
-      .toFormat("LLLL d, yyyy");
-  });
-
-  //creating a filter for our urls for gh-pages
-  eleventyConfig.addFilter("prefixedUrl", (url, prefix = "/eleventy-test-repo/") => {
-  // remove leading slash from URL, then prepend prefix
-  return prefix + url.replace(/^\/+/, "");
+    eleventyConfig.addFilter("readableDate", (dateObj) => {
+        return DateTime.fromJSDate(dateObj, { zone: "utc" })
+            .toFormat("LLLL d, yyyy");
     });
 
-  // Add pathPrefix as a global variable
-  eleventyConfig.addGlobalData("pathPrefix", "/eleventy-test-repo/");
+    // Determine if we are in production
+    const isProduction = process.env.ELEVENTY_ENV === "production";
 
-  return {
-    dir: { input: ".", output: "docs" },
-    htmlTemplateEngine: "njk",
-    templateFormats: ["html", "njk", "md"]
-  };
+    // Set pathPrefix once as a global
+    eleventyConfig.addGlobalData("pathPrefix", isProduction ? "/eleventy-test-repo/" : "/");
+
+    // Creating a filter for URLs for GH Pages
+    eleventyConfig.addFilter("prefixedUrl", (url, prefix) => {
+        // Use the prefix from argument or fallback to global pathPrefix
+        const finalPrefix = prefix || (isProduction ? "/eleventy-test-repo/" : "/");
+        // Remove leading slash from URL, then prepend prefix
+        return finalPrefix + url.replace(/^\/+/, "");
+    });
+    return {
+        dir: { input: ".", output: "docs" },
+        htmlTemplateEngine: "njk",
+        templateFormats: ["html", "njk", "md"]
+    };
 };
