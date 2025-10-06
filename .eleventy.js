@@ -9,6 +9,12 @@ module.exports = function(eleventyConfig) {
       .toFormat("LLLL d, yyyy");
   });
 
+  //creating a filter for our urls for gh-pages
+  eleventyConfig.addFilter("prefixedUrl", (url, prefix = "/eleventy-test-repo/") => {
+  // remove leading slash from URL, then prepend prefix
+  return prefix + url.replace(/^\/+/, "");
+    });
+
   // Add pathPrefix as a global variable
   eleventyConfig.addGlobalData("pathPrefix", "/eleventy-test-repo/");
 

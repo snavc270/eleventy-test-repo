@@ -17,7 +17,7 @@
         <ul>
             <!-- loops through all of our md files with the tag 'post' --> 
         {% for post in collections.post %}
-        <li><a href="{{ post.url | url }}">{{ post.data.title }}</a> – {{ post.date }}</li>
+        <li><a href="{{ post.url | prefixedUrl }}">{{ post.data.title }}</a> – {{ post.date }}</li>
         {% endfor %}
         </ul>
     </main>
